@@ -9,7 +9,10 @@
                  [ring "1.6.2"]
                  [ring-middleware-format "0.7.2"]
                  [ring/ring-json "0.4.0"]
-                 [compojure "1.6.0"]]
+                 [compojure "1.6.0"]
+                 [pandect "0.6.1"]
+                 [base64-clj "0.1.1"]
+                 ]
   :main ^:skip-aot kopokopo.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
