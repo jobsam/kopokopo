@@ -1,7 +1,8 @@
 (ns kopokopo.app
   (:require [pandect.algo.sha1 :refer :all]
             [base64-clj.core :as base64]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [clojure.tools.logging :as log]))
 
 (declare return-base-string get-symmetric-key return-signature)
 (defn validate-data
@@ -31,10 +32,12 @@
 (defn return-base-string
   "I prepare the base string that will be used to calculate the MAC"
   [arg-map]
+  (log/debug "return-base-stringReceived => (%s)" arg-map)
   (let [ordered-map (into (sorted-map) arg-map)
         my-string (for [[k v] ordered-map]
                     (str (name k) "=" v))
         base-string (string/join "&" my-string)]
+    (log/infof "Base-string => (%s)" base-string)
     base-string))
 
 (defn get-symmetric-key
@@ -48,5 +51,6 @@
   [{:keys [base-string symmetric-key]}]
   (let [hmac-sha1 (sha1-hmac base-string symmetric-key)
         new-signature (base64/encode hmac-sha1)]
+    (log/infof "new-signature => (%s)" new-signature)
     new-signature))
 

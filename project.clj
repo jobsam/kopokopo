@@ -12,7 +12,13 @@
                  [compojure "1.6.0"]
                  [pandect "0.6.1"]
                  [base64-clj "0.1.1"]
+                 [org.clojure/tools.logging "0.4.0"]
+                 [clj-time "0.13.0"]
+                 [environ "1.1.0"]
+                 [org.clojure/java.jdbc "0.7.2"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  ]
+  :jvm-opts ["-Dkyc.service.config=/home/jgateri/dev/k2/kopokopo/resources/config/dev/config.properties"]
   :main ^:skip-aot kopokopo.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

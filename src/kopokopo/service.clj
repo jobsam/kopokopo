@@ -5,12 +5,14 @@
     [compojure.route :as route]
     [compojure.handler :as handler]
     [ring.middleware.format :refer [wrap-restful-format]]
-    [ring.util.response :refer [response]]))
+    [ring.util.response :refer [response]]
+    [clojure.tools.logging :as log]))
 
 (defn transaction-consumer
   "I receive transactions from the endpoint then channel it to the form"
   [req]
   ;(println (str "KopoKopo sent ->" req))
+  (log/infof "Transaction consumer received => (%s)" req)
   (let [response (app/validate-data (:params req))]
     )
   #_(response
@@ -20,7 +22,7 @@
 (defn index
   "I don't do anything big. I just give a generic response"
   [req]
-  (println (str "Hit request ->" req))
+  (log/infof "Index => (%s)" req)
   (response {:status :ok :description "Welcome to KopoKopo API implementation in Clojure!"}))
 
 (defroutes app-routes
