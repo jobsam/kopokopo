@@ -17,6 +17,7 @@
                  [environ "1.1.0"]
                  [org.clojure/java.jdbc "0.7.2"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
+                 [c3p0/c3p0 "0.9.1.2"]
                  ]
   :jvm-opts ["-Dkyc.service.config=/home/jgateri/dev/k2/kopokopo/resources/config/dev/config.properties"]
   :main ^:skip-aot kopokopo.core

@@ -2,9 +2,11 @@
   (:require [pandect.algo.sha1 :refer :all]
             [base64-clj.core :as base64]
             [clojure.string :as string]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [clojure.java.jdbc :as jdbc]
+            [kopokopo.db :as db]))
 
-(declare return-base-string get-symmetric-key return-signature)
+(declare return-base-string get-key return-signature)
 (defn validate-data
   "I verify authenticity of the request sent to the app"
   [{:keys [service_name business_number transaction_reference internal_transaction_id transaction_timestamp
@@ -23,7 +25,7 @@
                                          :amount amount
                                          :currency currency
                                          :signature signature})
-        symmetric-key (get-symmetric-key)
+        symmetric-key (get-key "symmetric-key")
         new-signature (return-signature {:base-string base-string :symmetric-key symmetric-key})]
     (if (= new-signature signature)
       {:status "01" :description "Accepted" :subscriber_message "Thank you {} for your payment of Ksh {}. We value you"}
@@ -40,10 +42,12 @@
     (log/infof "Base-string => (%s)" base-string)
     base-string))
 
-(defn get-symmetric-key
-  "I return my account's symmetric key that I have stored in a db.
+(defn get-key
+  "I return my account's symmetric key is stored in a db.
   Use this function if you are not storing the key in the config"
-  []
+  [key-name]
+  (jdbc/query (db/db-connection)
+              ["select key_value from app_keys where key_name =?" key-name])
   )
 
 (defn return-signature
