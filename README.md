@@ -1,14 +1,12 @@
 # kopokopo
 
 Kopo Kopo Inc is a kenyan company that offers a platform to receive and manage mobile payments. 
-Please read more here http://kopokopo.co.ke/. This is basic implementation of the KopoKopo's 
-third party developer(https://app.kopokopo.com/push_api) api using Clojure language.
+Please read more here http://kopokopo.co.ke/. 
 
 ## Usage
 
-This is an implementation of transaction validation using HMAC (HMAC-SHA1). A map of KopoKopo parameters
-need to be passed as the parameter and in return, they will receive two statuses: either :failed for a transaction 
-that is not validated well or success for a well validated transaction. 
+This is an implementation of kopokopo APIs using Clojure language(https://app.kopokopo.com/push_api). We recieve payment
+notifications then we either return :success or :failed. 
 
 ## TODO
 

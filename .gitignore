@@ -1,2 +1,16 @@
 # Please ignore this when commiting
 
+/target
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+.hgignore
+.hg/
+
+# Also ignore all ide files
+.idea/*
